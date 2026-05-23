@@ -33,14 +33,22 @@ First you need to get your personal token to access air quality data. You can do
 5. Run a PostgreSQL script to create an empty table where all collected data will be written. See PostgreSQL setup for more.
 6. By default you will start collecting data for 9 stations in Moscow. You can change this in config.py.
 7. Access the project folder via terminal and run the following commands:
+
     `python3 -m venv venv`
+   
     `source venv/bin/activate`
+   
     `pip install -r requirements.txt`
-8. To collect data used for the final graph, set script.py to run automatically.
+   
+9. To collect data used for the final graph, set script.py to run automatically.
     An example using cron for automatic updates every 15 minutes:
+   
     `*/15 * * * * [project folder]/venv/bin/python3 [project folder]/script.py`
-9. Once you have enough data, run the following command to see the graph:
+   
+11. Once you have enough data, run the following command to see the graph:
+    
     `streamlit run dashboard.py`
+    
     A new tab with the graph and the table should automatically open in your default browser.
 
 
