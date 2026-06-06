@@ -28,6 +28,7 @@ First you need to get your personal token to access air quality data. You can do
     `docker compose up --build -d`
 
 Your dashboard will be available at http://localhost:8501. The first data will appear in 15 minutes.
+
 By default you will be collecting data for 9 stations in Moscow. You can change this in config.py.
 
 ## Project structure
@@ -43,10 +44,15 @@ By default you will be collecting data for 9 stations in Moscow. You can change 
 ## .env setup
 
 TOKEN=*your_token*
+
 PROXY=*your_proxy*  # optional
+
 CONN_DBNAME=air_quality
+
 CONN_USER=postgres
+
 CONN_PASSWORD=*your_password*
+
 CONN_HOST=db
 
 ## Tests launch
