@@ -75,3 +75,6 @@ def save_to_db(conn, data):
 
 
 save_to_db(conn, fetch_data(os.getenv("TOKEN"), STATIONS))
+
+if __name__ == "__main__":
+    save_to_db(conn, fetch_data(os.getenv("TOKEN"), STATIONS))
