@@ -1,0 +1,42 @@
+services:
+  script:
+    build:
+      context: .
+      dockerfile: Dockerfile.script
+    volumes:
+      - ./.env:/app/.env:ro
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    volumes:
+      - ./.env:/app/.env:ro
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${CONN_DBNAME}
+      POSTGRES_USER: ${CONN_USER}
+      POSTGRES_PASSWORD: ${CONN_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${CONN_USER} -d ${CONN_DBNAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  pgdata:
