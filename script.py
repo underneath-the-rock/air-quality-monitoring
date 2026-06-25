@@ -67,8 +67,6 @@ def save_to_db(conn, data):
     conn.close()
 
 
-save_to_db(conn, fetch_data(os.getenv("TOKEN"), STATIONS))
-
 if __name__ == "__main__":
     conn = psycopg2.connect(
         dbname=os.getenv("CONN_DBNAME"),
