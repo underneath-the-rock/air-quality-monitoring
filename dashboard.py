@@ -8,13 +8,6 @@ from dotenv import load_dotenv, dotenv_values
 
 load_dotenv()
 
-conn = psycopg2.connect(
-    dbname=os.getenv("CONN_DBNAME"),
-    user=os.getenv("CONN_USER"),
-    password=os.getenv("CONN_PASSWORD"),
-    host=os.getenv("CONN_HOST"),
-)
-
 st.set_page_config(page_title="Air Quality Monitor", layout="wide")
 st.title("Мониторинг качества воздуха")
 
@@ -109,3 +102,11 @@ summary = (
 summary.columns = [f"{col[0].upper()} ({col[1]})" for col in summary.columns]
 summary.index.name = "Название станции"
 st.dataframe(summary)
+
+if __name__ == "__main__":
+    conn = psycopg2.connect(
+        dbname=os.getenv("CONN_DBNAME"),
+        user=os.getenv("CONN_USER"),
+        password=os.getenv("CONN_PASSWORD"),
+        host=os.getenv("CONN_HOST"),
+    )

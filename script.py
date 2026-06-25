@@ -11,13 +11,6 @@ proxies = {
     "https": os.getenv("PROXY"),
 }
 
-conn = psycopg2.connect(
-    dbname=os.getenv("CONN_DBNAME"),
-    user=os.getenv("CONN_USER"),
-    password=os.getenv("CONN_PASSWORD"),
-    host=os.getenv("CONN_HOST"),
-)
-
 
 def fetch_data(token, stations):
     results = []
@@ -77,4 +70,10 @@ def save_to_db(conn, data):
 save_to_db(conn, fetch_data(os.getenv("TOKEN"), STATIONS))
 
 if __name__ == "__main__":
+    conn = psycopg2.connect(
+        dbname=os.getenv("CONN_DBNAME"),
+        user=os.getenv("CONN_USER"),
+        password=os.getenv("CONN_PASSWORD"),
+        host=os.getenv("CONN_HOST"),
+    )
     save_to_db(conn, fetch_data(os.getenv("TOKEN"), STATIONS))
